@@ -1,0 +1,804 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Search here</title>
+  <link rel="stylesheet" href="filter.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+
+    
+	<header>
+		<p>Enriching Minds, Empowering Readers</p>
+     <h1>LibraSys - Ultimate Library Management System </h1></p>
+		<p>Empowering the World of Books</p>
+	</header>
+  <div class="searchform">
+    <h1>Search Your books here </h1>
+    Enter title of the book:
+  <input type="text" id="titleInput" placeholder="Enter Title" ><br><br>
+  
+  Enter author of the book:
+  <input type="text" id="authorInput" placeholder="Enter Author" ><br><br>
+  
+  Enter subject of the book:
+  <input type="text" id="subjectInput" placeholder="Enter Subject"><br><br>
+  
+  Enter date of publication of the book:
+  <input type="date" id="publishDateInput" placeholder="Publish Date"><br><br><br>
+  <button class="btn"onclick="search()">Search</button>
+</div>
+  <div id="results">
+    <h2>Search Results</h2>
+    <p id="countTitle"></p>
+    <p id="countAuthor"></p>
+    <p id="countSubject"></p>
+    <p id="countPublishDate"></p>
+    <div id="booksContainer"></div>
+  </div>
+  <header>
+    <h1>For other queries,Contact</h1>
+    
+    <p>Nisha B - 9876545567</p>
+    <p>Nithish kumar B - 9876546567</p>
+    
+</header><br><br><br>
+
+
+  <script>
+    // Example book data
+    const books = [
+      {
+        title: "Python Crash Course",
+        author: "Krish naik",
+        subject: "Programming",
+        publishDate: "2021-01-01",
+        image: "book1.jpg"
+      },
+      {
+        title: "Eloquent Javascript",
+        author: "Telsuko",
+        subject: "Programming",
+        publishDate: "2022-05-10",
+        image: "book2.jpg"
+      },
+      {
+        title: "Computer Programming Language",
+        author: "Joe stanley",
+        subject: "Programming",
+        publishDate: "2023-03-15",
+        image: "book3.jpg"
+      },
+      {
+        title: "Imperative Programming",
+        author: "Krishnan",
+        subject: "Programming",
+        publishDate: "2022-12-05",
+        image: "book4.jpg"
+      },
+      
+      {
+        title: "The pragmatic programmer",
+        author: "David thomas",
+        subject: "Programming",
+        publishDate: "2021-07-20",
+        image: "book5.jpg"
+      },
+      {
+        title: "Optimizing C++",
+        author: "Nisha",
+        subject: "Programming",
+        publishDate: "2021-07-20",
+        image: "book6.jpg"
+      }
+      ,{
+        title: "Think like a Programmer",
+        author: "Chitti",
+        subject: "Programming",
+        publishDate: "2021-07-20",
+        image: "book7.jpg"
+      },
+      {
+        title: "Computer programming in C for beginners",
+        author: "karen",
+        subject: "Programming",
+        publishDate: "2021-07-20",
+        image: "book8.jpg"
+      },
+      {
+        title: "Python programming",
+        author: "Nithish",
+        subject: "Programming",
+        publishDate: "2021-07-20",
+        image: "book9.jpg"
+      },
+      {
+        title: "The complete C reference",
+        author: "Nithish",
+        subject: "Programming",
+        publishDate: "2021-07-20",
+        image: "book10.jpg"
+      },
+      {
+        title: "Coding for beginners",
+        author: "Krish naik",
+        subject: "Programming",
+        publishDate: "2021-07-20",
+        image: "book11.jpg"
+      },,
+      {
+        title: "Python and SQL for beginners",
+        author: "Telusko",
+        subject: "Programming",
+        publishDate: "2021-07-20",
+        image: "book12.jpg"
+      },
+      {
+        title: "Coding dummies",
+        author: "Joe stanley",
+        subject: "Programming",
+        publishDate: "2021-07-20",
+        image: "book13.jpg"
+      },
+      {
+        title: "Web coding and development",
+        author: "Krishnan",
+        subject: "Programming",
+        publishDate: "2021-07-20",
+        image: "book14.jpg"
+      },
+      {
+        title: "Coding for dummies",
+        author: "David thomas",
+        subject: "Programming",
+        publishDate: "2021-07-20",
+        image: "book15.jpg"
+      },
+      {
+        title: "The complete software development course",
+        author: "Nisha",
+        subject: "Programming",
+        publishDate: "2021-07-20",
+        image: "book16.jpg"
+      },
+      {
+        title: "Python programming",
+        author: "Chitti",
+        subject: "Programming",
+        publishDate: "2021-07-20",
+        image: "book17.jpg"
+      },
+      {
+        title: "Scratch coding for beginners",
+        author: "Karen",
+        subject: "Programming",
+        publishDate: "2021-07-20",
+        image: "book18.jpg"
+      },
+      {
+        title: "Dummy coding",
+        author: "Nithish",
+        subject: "Programming",
+        publishDate: "2021-07-20",
+        image: "book19.jpg"
+      },
+      {
+        title: "Java for beginners",
+        author: "Nithish",
+        subject: "Programming",
+        publishDate: "2021-07-20",
+        image: "book20.jpg"
+      }
+      ,
+      {
+        title: "Current affairs 2023",
+        author: "Nithish",
+        subject: "current affairs",
+        publishDate: "2021-07-20",
+        image: "cbook1.jpg"
+      },
+      {
+        title: "Current affairs for all competitive exams",
+        author: "Telusko",
+        subject: "current affairs",
+        publishDate: "2021-07-20",
+        image: "cbook2.jpg"
+      },
+      {
+        title: "Current affairs 2021",
+        author: "Joe stanley",
+        subject: "current affairs",
+        publishDate: "2021-07-20",
+        image: "cbook3.jpg"
+      },
+      {
+        title: "Current affairs 2022",
+        author: "Krishnan",
+        subject: "current affairs",
+        publishDate: "2021-07-20",
+        image: "cbook4.jpg"
+      },
+      {
+        title: "Gk and Current affairs",
+        author: "David Thomas",
+        subject: "current affairs",
+        publishDate: "2021-07-20",
+        image: "cbook5.jpg"
+      },
+      {
+        title: "TNPSC daily Current affairs",
+        author: "Nisha",
+        subject: "current affairs",
+        publishDate: "2021-07-20",
+        image: "cbook6.jpg"
+      },
+      {
+        title: "Current affairs answer sheet",
+        author: "Chitti",
+        subject: "current affairs",
+        publishDate: "2021-07-20",
+        image: "cbook7.jpg"
+      },
+      {
+        title: "GK and Current affairs",
+        author: "Karen",
+        subject: "current affairs",
+        publishDate: "2021-07-20",
+        image: "cbook8.jpg"
+      },
+      {
+        title: "Current affairs 2019",
+        author: "Nithish",
+        subject: "current affairs",
+        publishDate: "2021-07-20",
+        image: "cbook9.jpg"
+      },
+      {
+        title: "2 years Current affairs",
+        author: "Nithish",
+        subject: "current affairs",
+        publishDate: "2021-07-20",
+        image: "cbook10.jpg"
+      },
+      {
+        title: "Current affairs  2021",
+        author: "Krish naik",
+        subject: "current affairs",
+        publishDate: "2021-07-20",
+        image: "cbook11.jpg"
+      },
+      {
+        title: "Current affairs scanner 2022-2023",
+        author: "Telusko",
+        subject: "current affairs",
+        publishDate: "2021-07-20",
+        image: "cbook12.jpg"
+      },
+      {
+        title: "Defence Current affairs 2021",
+        author: "Joe stanley",
+        subject: "current affairs",
+        publishDate: "2021-07-20",
+        image: "cbook13.jpg"
+      },
+      {
+        title: "Current affairs JSSC CGL",
+        author: "Krishnan",
+        subject: "current affairs",
+        publishDate: "2021-07-20",
+        image: "cbook14.jpg"
+      },
+      {
+        title: "October 2021 Gk and Current affairs",
+        author: "David Thomas",
+        subject: "current affairs",
+        publishDate: "2021-07-20",
+        image: "cbook15.jpg"
+      },
+      {
+        title: "Latest Current affairs",
+        author: "Nisha",
+        subject: "current affairs",
+        publishDate: "2021-07-20",
+        image: "cbook16.jpg"
+      },
+      {
+        title: "The high scoring guide for Current affairs ",
+        author: "Chitti",
+        subject: "current affairs",
+        publishDate: "2021-07-20",
+        image: "cbook17.jpg"
+      },
+      {
+        title: "The mega year book 2023",
+        author: "Karen",
+        subject: "current affairs",
+        publishDate: "2021-07-20",
+        image: "cbook18.jpg"
+      },
+      {
+        title: "GK today and Current affairs 2021",
+        author: "Nithish",
+        subject: "current affairs",
+        publishDate: "2021-07-20",
+        image: "cbook19.jpg"
+      },
+      {
+        title: "GK and politics",
+        author: "Nithish",
+        subject: "current affairs",
+        publishDate: "2021-07-20",
+        image: "cbook20.jpg"
+      },
+      {
+        title: "Back to school",
+        author: "Krish naik",
+        subject: "Kids stories",
+        publishDate: "2021-07-20",
+        image: "kbook1.jpg"
+      },
+      {
+        title: "Something is hiding",
+        author: "Telusko",
+        subject: "Kids stories",
+        publishDate: "2021-07-20",
+        image: "kbook2.jpg"
+      },
+      {
+        title: "mahabharata",
+        author: "Joe stanley",
+        subject: "Kids stories",
+        publishDate: "2021-07-20",
+        image: "kbook3.jpg"
+      },
+      {
+        title: "letters to krishna",
+        author: "Krishnan",
+        subject: "moral stories",
+        publishDate: "2021-07-20",
+        image: "kbook4.jpg"
+      },
+      {
+        title: "Bible stories",
+        author: "David Thomas",
+        subject: "moral stories",
+        publishDate: "2021-07-20",
+        image: "kbook5.jpg"
+      },
+      {
+        title: "Swamp yoga",
+        author: "Nisha",
+        subject: "moral stories",
+        publishDate: "2021-07-20",
+        image: "kbook6.jpg"
+      },
+      {
+        title: "Peter rabbit",
+        author: "Chitti",
+        subject: "moral stories",
+        publishDate: "2021-07-20",
+        image: "kbook7.jpg"
+      },
+      {
+        title: "Beauty and the beast",
+        author: "Karen",
+        subject: "moral stories",
+        publishDate: "2021-07-20",
+        image: "kbook8.jpg"
+      },
+      {
+        title: "kidcasts",
+        author: "Nithish",
+        subject: "moral stories",
+        publishDate: "2021-07-20",
+        image: "kbook9.jpg"
+      },
+      {
+        title: "Finding Winnie",
+        author: "Nithish",
+        subject: "moral stories",
+        publishDate: "2021-07-20",
+        image: "kbook10.jpg"
+      },
+      {
+        title: "Freedom's journal",
+        author: "Krish naik",
+        subject: "newspaper",
+        publishDate: "2021-01-01",
+        image: "pbook1.jpg"
+      },
+      {
+        title: "The sangai express",
+        author: "Telsuko",
+        subject: "newspaper",
+        publishDate: "2022-05-10",
+        image: "pbook2.jpg"
+      },
+      {
+        title: "The asian age",
+        author: "Joe stanley",
+        subject: "newspaper",
+        publishDate: "2023-03-15",
+        image: "pbook3.jpg"
+      },
+      {
+        title: "The times of india",
+        author: "Krishnan",
+        subject: "newspaper",
+        publishDate: "2022-12-05",
+        image: "pbook4.jpg"
+      },
+      
+      {
+        title: "Hindustan times",
+        author: "David thomas",
+        subject: "newspaper",
+        publishDate: "2021-07-20",
+        image: "pbook5.jpg"
+      },
+      {
+        title: "Morning India",
+        author: "Nisha",
+        subject: "newspaper",
+        publishDate: "2021-07-20",
+        image: "pbook6.jpg"
+      }
+      ,{
+        title: "Afternoon voice",
+        author: "Chitti",
+        subject: "newspaper",
+        publishDate: "2021-07-20",
+        image: "pbook7.jpg"
+      },
+      {
+        title: "State times",
+        author: "karen",
+        subject: "newspaper",
+        publishDate: "2021-07-20",
+        image: "pbook8.jpg"
+      },
+      {
+        title: "The telegraph",
+        author: "Nithish",
+        subject: "newspaper",
+        publishDate: "2021-07-20",
+        image: "pbook9.jpg"
+      },
+      {
+        title: "Transparent news",
+        author: "Nithish",
+        subject: "newspaper",
+        publishDate: "2021-07-20",
+        image: "pbook10.jpg"
+      },
+      {
+        title: "Orissa post",
+        author: "Krish naik",
+        subject: "newspaper",
+        publishDate: "2021-07-20",
+        image: "pbook11.jpg"
+      },
+      {
+        title: "City first",
+        author: "Krish naik",
+        subject: "newspaper",
+        publishDate: "2021-07-20",
+        image: "pbook12.jpg"
+      },
+      {
+        title: "Dawn",
+        author: "Joe stanley",
+        subject: "newspaper",
+        publishDate: "2021-07-20",
+        image: "pbook13.jpg"
+      },
+      {
+        title: "Sherlock holmes",
+        author: "Krish naik",
+        subject: "Novel",
+        publishDate: "2021-01-01",
+        image: "nbook1.jpg"
+      },
+      {
+        title: "The cantervile ghost",
+        author: "Telsuko",
+        subject: "Novel",
+        publishDate: "2022-05-10",
+        image: "nbook2.jpg"
+      },
+      {
+        title: "Life is what you make it",
+        author: "Joe stanley",
+        subject: "Novel",
+        publishDate: "2023-03-15",
+        image: "nbook3.jpg"
+      },
+      {
+        title: "Decide your destiny",
+        author: "Krishnan",
+        subject: "Novel",
+        publishDate: "2022-12-05",
+        image: "nbook4.jpg"
+      },
+      
+      {
+        title: "Write your own science fiction stories",
+        author: "David thomas",
+        subject: "Novel",
+        publishDate: "2021-07-20",
+        image: "nbook5.jpg"
+      },
+      {
+        title: "The passionate bibliphile",
+        author: "Nisha",
+        subject: "Novel",
+        publishDate: "2021-07-20",
+        image: "nbook6.jpg"
+      }
+      ,{
+        title: "The house across the lake",
+        author: "Chitti",
+        subject: "Novel",
+        publishDate: "2021-07-20",
+        image: "nbook7.jpg"
+      },
+      {
+        title: "Ghost stories",
+        author: "karen",
+        subject: "Novel",
+        publishDate: "2021-07-20",
+        image: "nbook8.jpg"
+      },
+      {
+        title: "The biography of umar",
+        author: "Nithish",
+        subject: "Novel",
+        publishDate: "2021-07-20",
+        image: "nbook9.jpg"
+      },
+      {
+        title: "The Stories of jesus",
+        author: "Nithish",
+        subject: "Novel",
+        publishDate: "2021-07-20",
+        image: "nbook10.jpg"
+      },
+      {
+        title: "Alice in wonderland",
+        author: "Krish naik",
+        subject: "Novel",
+        publishDate: "2021-07-20",
+        image: "nbook11.jpg"
+      },,
+      {
+        title: "Percy jackson",
+        author: "Telusko",
+        subject: "Novel",
+        publishDate: "2021-07-20",
+        image: "nbook12.jpg"
+      },
+      {
+        title: "Harry potter",
+        author: "Joe stanley",
+        subject: "Programming",
+        publishDate: "2021-07-20",
+        image: "nbook13.jpg"
+      },
+      {
+        title: "Five smooth stones",
+        author: "Krishnan",
+        subject: "Novel",
+        publishDate: "2021-07-20",
+        image: "nbook14.jpg"
+      },
+      {
+        title: "Crooked kingdom",
+        author: "David thomas",
+        subject: "Novel",
+        publishDate: "2021-07-20",
+        image: "nbook15.jpg"
+      },
+      {
+        title: "The little stranger",
+        author: "Nisha",
+        subject: "Novel",
+        publishDate: "2021-07-20",
+        image: "nbook16.jpg"
+      },
+      {
+        title: "Best american short stories",
+        author: "Chitti",
+        subject: "Novel",
+        publishDate: "2021-07-20",
+        image: "nbook17.jpg"
+      },
+      {
+        title: "Turn the shape around",
+        author: "Karen",
+        subject: "Novel",
+        publishDate: "2021-07-20",
+        image: "nbook18.jpg"
+      },
+      {
+        title: "Stole the clouds",
+        author: "Nithish",
+        subject: "Novel",
+        publishDate: "2021-07-20",
+        image: "nbook19.jpg"
+      },
+      {
+        title: "Persepolis",
+        author: "Nithish",
+        subject: "Novel",
+        publishDate: "2021-07-20",
+        image: "nbook20.jpg"
+      },
+      {
+        title: "Spiderman",
+        author: "Krish naik",
+        subject: "Marvel stories",
+        publishDate: "2021-01-01",
+        image: "mbook1.jpg"
+      },
+      {
+        title: "Avengers",
+        author: "Telsuko",
+        subject: "Marvel stories",
+        publishDate: "2022-05-10",
+        image: "mbook2.jpg"
+      },
+      {
+        title: "Avengers 1959",
+        author: "Joe stanley",
+        subject: "Marvel stories",
+        publishDate: "2023-03-15",
+        image: "mbook3.jpg"
+      },
+      {
+        title: "5 minute marvel stories",
+        author: "Krishnan",
+        subject: "Marvel stories",
+        publishDate: "2022-12-05",
+        image: "mbook4.jpg"
+      },
+      
+      {
+        title: "Comic sticker book",
+        author: "David thomas",
+        subject: "Marvel stories",
+        publishDate: "2021-07-20",
+        image: "mbook5.jpg"
+      },
+      {
+        title: "Spiderman beginnings",
+        author: "Nisha",
+        subject: "Marvel stories",
+        publishDate: "2021-07-20",
+        image: "mbook6.jpg"
+      }
+      ,{
+        title: "Marvel story book collection",
+        author: "Chitti",
+        subject: "Marvel stories",
+        publishDate: "2021-07-20",
+        image: "mbook7.jpg"
+      },
+      {
+        title: "Ultimate carry pack",
+        author: "karen",
+        subject: "Marvel stories",
+        publishDate: "2021-07-20",
+        image: "mbook8.jpg"
+      },
+      {
+        title: "Spiderman museum",
+        author: "Nithish",
+        subject: "Marvel stories",
+        publishDate: "2021-07-20",
+        image: "mbook9.jpg"
+      },
+      {
+        title: "5 minute marvel stories",
+        author: "Nithish",
+        subject: "Marvel stories",
+        publishDate: "2021-07-20",
+        image: "mbook10.jpg"
+      },
+      {
+        title: "Alice in wonderland",
+        author: "Krish naik",
+        subject: "Novel",
+        publishDate: "2021-07-20",
+        image: "nbook11.jpg"
+      },,
+      {
+        title: "Percy jackson",
+        author: "Telusko",
+        subject: "Novel",
+        publishDate: "2021-07-20",
+        image: "nbook12.jpg"
+      },
+      {
+        title: "Harry potter",
+        author: "Joe stanley",
+        subject: "Programming",
+        publishDate: "2021-07-20",
+        image: "nbook13.jpg"
+      },
+      {
+        title: "Five smooth stones",
+        author: "Krishnan",
+        subject: "Novel",
+        publishDate: "2021-07-20",
+        image: "nbook14.jpg"
+      },
+      {
+        title: "Crooked kingdom",
+        author: "David thomas",
+        subject: "Novel",
+        publishDate: "2021-07-20",
+        image: "nbook15.jpg"
+      }
+      
+    ];
+
+    // Function to perform search and update results
+    function search() {
+      const title = document.getElementById("titleInput").value;
+      const author = document.getElementById("authorInput").value;
+      const subject = document.getElementById("subjectInput").value;
+      const publishDate = document.getElementById("publishDateInput").value;
+      
+
+      //validate inputs
+      
+
+      // Filter books based on search criteria
+      const filteredBooks = books.filter(book => {
+        return (
+          book.title.toLowerCase().includes(title.toLowerCase()) &&
+          book.author.toLowerCase().includes(author.toLowerCase()) &&
+          book.subject.toLowerCase().includes(subject.toLowerCase()) &&
+          (publishDate === "" || book.publishDate === publishDate)
+          
+        );
+      });
+
+      // Display count of books for each filter
+      document.getElementById("countTitle").innerHTML = `Title Count: ${filteredBooks.length}`;
+      document.getElementById("countAuthor").innerHTML = `Author Count: ${filteredBooks.length}`;
+      document.getElementById("countSubject").innerHTML = `Subject Count: ${filteredBooks
+
+.length}`;
+      document.getElementById("countPublishDate").innerHTML = `Publish Date Count: ${filteredBooks.length}`;
+
+      // Display book images and details
+      const booksContainer = document.getElementById("booksContainer");
+      booksContainer.innerHTML = "";
+
+      filteredBooks.forEach(book => {
+        const bookElement = document.createElement("div");
+        bookElement.className = "book";
+
+        const imageElement = document.createElement("img");
+        imageElement.className = "book-image";
+        imageElement.src = book.image;
+
+        const detailsElement = document.createElement("div");
+        detailsElement.className = "book-details";
+        detailsElement.innerHTML = `
+          <h3>${book.title}</h3>
+          <p>Author: ${book.author}</p>
+          <p>Subject: ${book.subject}</p>
+          <p>Publish Date: ${book.publishDate}</p>
+        `;
+
+        bookElement.appendChild(imageElement);
+        bookElement.appendChild(detailsElement);
+        booksContainer.appendChild(bookElement);
+      });
+    }
+  </script>
+</body>
+</html>
