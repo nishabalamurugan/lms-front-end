@@ -1,0 +1,120 @@
+*{
+    text-align: center;
+    font-size: 25px;
+    align-items: center;
+    justify-content: left;
+}
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    text-align: center;
+   
+    
+}
+body{
+  background-color: antiquewhite;
+}
+h2{
+    text-align:center;
+    font-size: 40px;
+    font-weight: bolder;
+    font-style: italic;
+}
+.heading 
+{
+    display: flex;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    
+}
+
+
+.main 
+{
+    display: flex;
+}
+button
+{
+    border-radius: 10px;
+    background-color:#40704d;
+    color:white;
+}
+.image-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .image-row a {
+    flex: 0 0 30%;
+  }
+  
+  .image-row img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin:20px;
+  }
+  .item
+  {
+    display: flex;
+    margin:70px;
+    margin-bottom:10px;
+ 
+  }
+  .item img{
+    margin-right: 50px;
+  }
+  li{
+    display: inline;
+  }
+
+  img {
+    transition: transform 0.3s;
+  }
+  
+  img:hover {
+    transform: scale(1.2); 
+  }
+  button {
+    --c:  #229091; /* the color*/
+    
+    box-shadow: 0 0 0 .1em inset var(--c); 
+    --_g: linear-gradient(var(--c) 0 0) no-repeat;
+    background: 
+      var(--_g) calc(var(--_p,0%) - 100%) 0%,
+      var(--_g) calc(200% - var(--_p,0%)) 0%,
+      var(--_g) calc(var(--_p,0%) - 100%) 100%,
+      var(--_g) calc(200% - var(--_p,0%)) 100%;
+    background-size: 50.5% calc(var(--_p,0%)/2 + .5%);
+    outline-offset: .1em;
+    transition: background-size .4s, background-position 0s .4s;
+  }
+  button:hover {
+    --_p: 100%;
+    transition: background-position .4s, background-size 0s;
+  }
+  button:active {
+    box-shadow: 0 0 9e9q inset #0009; 
+    background-color: var(--c);
+    color: #fff;
+  }
+  
+  
+  
+  
+  button,input[type="button"] {
+    font-family: system-ui, sans-serif;
+    font-size: 30px;
+    cursor: pointer;
+    padding: .1em .6em;
+    font-weight: bold;  
+    border: none;
+    color:black
+  }
+
+  
